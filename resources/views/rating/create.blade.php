@@ -36,7 +36,7 @@
 
         <div>
             <label for="rating">Rating</label>
-            <input type="number" name="rating" min="0" max="10" placeholder="Add rating from 0 to 10">
+            <input type="number" name="rating" min="0" max="10" placeholder="Add rating from 1 to 10">
         </div>
 
         <button type="submit">Submit</button>
