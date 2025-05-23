@@ -30,7 +30,7 @@
         <div>
             <label for="name">Book Name</label>
             <select name="book" id="bookLists" required>
-                <option value="" disabled selected>-- select book --</option>
+                <option value="" disabled selected>-- No books found --</option>
             </select>
         </div>
 
@@ -51,8 +51,10 @@
         document.getElementById("authorInput").value = "";
         let bookListsEl = document.getElementById('bookLists');
         let bookListsDefaultEl = bookListsEl.firstElementChild;
+        bookListsDefaultEl.innerHTML = "-- No books found --";
         bookListsEl.innerHTML = "";
-        bookListsEl.append(bookListsDefaultEl)
+        bookListsEl.append(bookListsDefaultEl);
+        bookListsEl.value = "";
         
         const authorLists = document.getElementById("author-list");
         const selectedEl = authorLists.options.namedItem(this.value);
@@ -66,6 +68,7 @@
             .then(res => res.json())
             .then(data => {
                 data.data.forEach(book => {
+                    bookListsEl.firstElementChild.innerText = `Total ${data.data.length} book(s) found.`; 
                     const optEl = document.createElement('option');
                     optEl.value = book.id;
                     optEl.innerText = book.name;
