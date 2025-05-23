@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav {
+    width: 100%;
+    background: #c7c7c7;
+    color: white;
+}
+
+nav ul li {
+    display: inline-table;
+    padding: 20px 24px;
+}
+
+nav ul li:hover {
+    background: #959595;
+}
+
+main {
+    padding: 40px 0;
+}
+
+input,
+select {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 2px solid #a7a7a7;
+    width: 200px;
+    -webkit-box-sizing: content-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: content-box; /* Firefox, other Gecko */
+    box-sizing: content-box; /* Opera/IE 8+ */
+}
+
+form button[type="submit"] {
+    background: rgb(57, 132, 185);
+    color: white;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: none;
+}
+
+form > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+form > div > label {
+    min-width: 120px;
+}
+
+main #home #tableFilter {
+    display: flex;
+    justify-content: space-between;
+}
+
+#home table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#home table thead {
+    background: rgb(57, 132, 185);
+    color: white;
+}
+
+#home table tr td,
+#home table tr th {
+    padding: 10px 12px;
+    /* border-bottom: 1px solid #888888; */
+}
+
+#home table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.title {
+    margin-bottom: 16px;
+}
