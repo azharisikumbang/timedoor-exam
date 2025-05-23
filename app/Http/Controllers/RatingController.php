@@ -31,6 +31,6 @@ class RatingController extends Controller
             'value' => $validated['rating']
         ]);
 
-        return to_route('home')->with('success', 'Rating added successfully.');
+        return to_route('home')->with('success', 'New rating added successfully.');
     }
 }

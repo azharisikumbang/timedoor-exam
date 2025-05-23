@@ -2,6 +2,10 @@
 
 @section('content')
 <section id="home">
+    @session('success')
+    <p style="margin-bottom: 16px; color: green">{{ session('success') }}</p>
+    @endsession
+
     <h1 class="title">Book Lists</h1>
 
     <div id="tableFilter">
@@ -10,7 +14,7 @@
                 placeholder="Type book name or author.." autofocus>
             <button type="submit">Submit</button>
             @if (isset($_GET['search']))
-            <button onclick="window.location = window.location.href.split('?')[0];">Reset</button>
+            <a href="{{ route('home') }}">Reset</a>
             @endif
         </form>
 
