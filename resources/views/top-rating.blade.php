@@ -6,16 +6,16 @@
     <table>
         <thead>
             <tr>
-                <th>No</th>
-                <th>Author</th>
-                <th>Voter</th>
+                <th style="width: 20px">No</th>
+                <th style="text-align: left; width: 320px">Author Name</th>
+                <th>Total Voters</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($topRatings as $item)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $item['author_name'] }}</td>
+                <td style="text-align: left">{{ $item['author_name'] }}</td>
                 <td>{{ $item['total_voters'] }}</td>
             </tr>
             @endforeach

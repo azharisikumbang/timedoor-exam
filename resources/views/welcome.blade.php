@@ -23,10 +23,9 @@
                 List Shown :
             </div>
             <select name="sort" id="sortInput">
-                <option value="10" <?=(isset($_GET['shown']) && $_GET['shown']==10) ? 'selected' : '' ?>>10</option>
-                <option value="25" <?=(isset($_GET['shown']) && $_GET['shown']==25) ? 'selected' : '' ?>>25</option>
-                <option value="50" <?=(isset($_GET['shown']) && $_GET['shown']==50) ? 'selected' : '' ?>>50</option>
-                <option value="100" <?=(isset($_GET['shown']) && $_GET['shown']==100) ? 'selected' : '' ?>>100</option>
+                @for ($i = 10; $i <= 100; $i +=10) <option value="{{ $i }}" <?=(isset($_GET['shown']) &&
+                    $_GET['shown']==$i) ? 'selected' : '' ?>>{{ $i }}</option>
+                    @endfor
             </select>
         </div>
     </div>
@@ -34,9 +33,9 @@
     <table>
         <thead>
             <tr>
-                <th>No</th>
-                <th>Title</th>
-                <th>Category</th>
+                <th style="width: 22px">No</th>
+                <th style="text-align: left">Title</th>
+                <th style="text-align: left; width: 120px">Category</th>
                 <th>Author</th>
                 <th>Average Rating</th>
                 <th>Voter</th>
@@ -46,8 +45,8 @@
             @forelse ($books['data'] as $book)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $book['book_name'] }}</td>
-                <td>{{ $book['book_category_name'] }}</td>
+                <td style="text-align: left">{{ $book['book_name'] }}</td>
+                <td style="text-align: left">{{ $book['book_category_name'] }}</td>
                 <td>{{ $book['author_name'] }}</td>
                 <td>{{ $book['avg_rating'] }}</td>
                 <td>{{ $book['total_voters'] }}</td>
