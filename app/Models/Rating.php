@@ -33,6 +33,7 @@ class Rating extends Model
         ])
             ->groupBy('book_id')
             ->orderBy('avg_rating', 'desc')
+            ->orderBy('total_voters', 'desc')
             ->offset($offset)
             ->limit($limit)
             ->get();

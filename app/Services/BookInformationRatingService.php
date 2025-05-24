@@ -10,8 +10,6 @@ use App\Models\Rating;
 use DB;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
 
 class BookInformationRatingService
 {
@@ -36,9 +34,14 @@ class BookInformationRatingService
             ->whereIn('id', $booksPopular->pluck('book_id')->all())
             ->get();
 
-        $transformToView = $books->map(function ($model) use ($booksPopular) {
-            $rating = $booksPopular->where('book_id', $model->id)->first();
-            return $this->convertToViewResponse($model, $rating->avg_rating, $rating->total_voters);
+        $transformToView = $booksPopular->map(function ($model) use ($books) {
+            $book = $books->where('id', $model->book_id)->first();
+
+            return $this->convertToViewResponse(
+                $book,
+                $model->avg_rating,
+                $model->total_voters
+            );
         });
 
         return (new LengthAwarePaginator(
