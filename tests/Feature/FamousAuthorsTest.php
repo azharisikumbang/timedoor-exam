@@ -97,18 +97,46 @@ class FamousAuthorsTest extends TestCase
         // expected votes
         Rating::factory($expectedVotes)->create([
             'book_id' => 1,
-            'value' => mt_rand(6, 10)
+            'value' => 10
         ]);
 
+        Rating::factory($expectedVotes)->create([
+            'book_id' => 2,
+            'value' => 10
+        ]);
 
         $topAuthors = Author::topAuthors();
 
-        $this->assertCount(1, $topAuthors);
+        $this->assertCount(1, $topAuthors->toArray());
         foreach ($topAuthors as $author)
         {
             $this->assertInstanceOf(Author::class, $author);
             $this->assertEquals(1, $author->id); // it should be author with id 1
             $this->assertEquals($expectedVotes, $author->total_votes_count); // 10
         }
+    }
+
+    public function testItNotGetAuthorWithZeroVotes()
+    {
+        $expectedAuthorId = 1;
+
+        // create 10 author with 2 books, total 20 books
+        BookCategory::factory(2)->create();
+        Author::factory(10)->create()->each(function ($model) {
+            Book::factory(2)->create(['book_category_id' => mt_rand(1, 2), 'author_id' => $model->id]);
+        });
+
+        // other votes
+        for ($i = 0; $i < 30; $i++)
+        {
+            Rating::factory()->create([
+                'book_id' => mt_rand(3, 20), // book 1 and 2 will be expected
+                'value' => 1
+            ]);
+        }
+
+        $topAuthorIds = Author::topAuthors()->pluck('id')->toArray();
+
+        $this->assertFalse(in_array($expectedAuthorId, $topAuthorIds));
     }
 }

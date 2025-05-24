@@ -36,6 +36,7 @@ class Author extends Model
                     )
                     ->toRawSql())
             )
+            ->whereNot('total_votes_count', 0)
             ->orderBy('total_votes_count', 'desc')
             ->limit($total)
             ->get();
