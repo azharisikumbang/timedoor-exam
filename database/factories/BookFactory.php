@@ -17,16 +17,9 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->generateBookTitle(),
+            'name' => ucfirst(fake()->sentence(5)),
             'book_category_id' => mt_rand(1, 3000),
             'author_id' => mt_rand(1, 1000),
         ];
-    }
-
-    private function generateBookTitle(): string
-    {
-        $sentence = fake()->sentence(5);
-
-        return substr($sentence, 0, strlen($sentence) - 1);
     }
 }
