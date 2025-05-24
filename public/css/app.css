@@ -24,7 +24,7 @@ nav ul li {
 }
 
 nav ul li:hover {
-    background: #959595;
+    background: rgb(57, 132, 185);
 }
 
 main {
@@ -36,7 +36,7 @@ select {
     padding: 8px 10px;
     border-radius: 6px;
     border: 2px solid #a7a7a7;
-    width: 200px;
+    width: 280px;
     -webkit-box-sizing: content-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: content-box; /* Firefox, other Gecko */
     box-sizing: content-box; /* Opera/IE 8+ */
