@@ -17,7 +17,7 @@ class BookCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => ucfirst(fake()->unique()->words(mt_rand(1, 2)))
+            'name' => ucfirst(fake()->unique()->words(mt_rand(1, 2), true))
         ];
     }
 }
