@@ -95,12 +95,12 @@ class FamousAuthorsTest extends TestCase
         }
 
         // expected votes
-        Rating::factory($expectedVotes)->create([
+        Rating::factory(5)->create([
             'book_id' => 1,
             'value' => 10
         ]);
 
-        Rating::factory($expectedVotes)->create([
+        Rating::factory(5)->create([
             'book_id' => 2,
             'value' => 10
         ]);
