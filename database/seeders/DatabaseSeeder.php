@@ -3,10 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Author;
-use App\Models\Book;
-use App\Models\BookCategory;
-use App\Models\Rating;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,7 +16,8 @@ class DatabaseSeeder extends Seeder
             AuthorSeeder::class,
             BookCategorySeeder::class,
             BookSeeder::class,
-            RatingSeeder::class
+            RatingSeeder::class,
+            TopAuthorSeeder::class
         ]);
     }
 }

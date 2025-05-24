@@ -16,7 +16,7 @@ class Rating extends Model
 
     protected $fillable = [
         'book_id',
-        'value'
+        'value' // TODO: change field  name to rating: preserved key
     ];
 
     public function book(): BelongsTo
@@ -26,7 +26,6 @@ class Rating extends Model
 
     public function scopePopular($query, int $limit = 10, int $offset = 0)
     {
-        // SELECT book_id, AVG(value) as avg_rating FROM ratings GROUP BY book_id ORDER BY avg_rating DESC LIMIT 10;
         return $this->select([
             'book_id',
             DB::raw("AVG(value) as avg_rating"),
@@ -34,19 +33,6 @@ class Rating extends Model
         ])
             ->groupBy('book_id')
             ->orderBy('avg_rating', 'desc')
-            ->offset($offset)
-            ->limit($limit)
-            ->get();
-    }
-
-    public function scopeHigherVotes($query, int $limit = 10, int $offset = 0): array|Collection
-    {
-        return $this->select([
-            'book_id',
-            DB::raw("COUNT(book_id) as total_voters")
-        ])
-            ->groupBy('book_id')
-            ->orderBy('total_voters', 'desc')
             ->offset($offset)
             ->limit($limit)
             ->get();

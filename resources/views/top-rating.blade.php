@@ -12,13 +12,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($topRatings as $item)
+            @forelse ($topRatings as $item)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td style="text-align: left">{{ $item['author_name'] }}</td>
                 <td>{{ $item['total_voters'] }}</td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td colspan="3">Tidak ada data.</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
 </section>
