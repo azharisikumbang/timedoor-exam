@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\Rating;
-use App\Services\BookInformationRatingService;
-use App\Services\BookService;
+use App\Services\BookRatingService;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
@@ -17,14 +13,27 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $books = (new BookInformationRatingService)->getBooks(
-            $request->get('shown', 10),
-            $request->get('search', null),
-            $request->get('page', 0),
-        );
+        $service = new BookRatingService();
+        $service
+            ->withQueryString($request)
+            ->getBooksWithRatingAndVotes();
+
+        $paginated = (new Paginator(
+            $service->toViewResponse(),
+            $service->getTotalDisplayed(),
+            $service->getPage(),
+
+        ))->withQueryString();
+
+        $nextPage = ($paginated->count() == $service->getTotalDisplayed()) ?
+            $paginated->url($paginated->currentPage() + 1) : null;
 
         return view('welcome', [
-            'books' => $books->toArray()
+            'books' => array_merge($paginated->toArray(), [
+                // its neede because we we paginate manually at database level
+                'prev_page_url' => $paginated->previousPageUrl(),
+                'next_page_url' => $nextPage,
+            ])
         ]);
     }
 }
