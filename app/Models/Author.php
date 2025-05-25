@@ -36,9 +36,10 @@ class Author extends Model
                     )
                     ->toRawSql())
             )
-            ->whereNot('total_votes_count', 0)
+            // ->whereNot('total_votes_count', 0)
             ->orderBy('total_votes_count', 'desc')
             ->limit($total)
-            ->get();
+            ->get()
+            ->filter(fn($item) => $item->total_votes_count > 0);
     }
 }
